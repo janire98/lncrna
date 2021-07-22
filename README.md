@@ -44,10 +44,11 @@ Cuantitativamente hablando, se expresan mucho menos que los RNA mensajeros (mRNA
 El objetivo principal es realizar una estratificación del hepatocarcinoma en base a los long non-coding RNA (lncRNA).
 
 ### Objetivos específicos
-Clusterizar los genes y relacionarlos con una mayor o menor supervivencia en el paciente.
+Estudiar qué genes tienen impacto significante en la supervivencia del paciente.
 
 # Hipótesis
-La desregulación de los lncRNA parece darse de forma más específica para cada enfermedad. Así pues, el estudio de estos puede ser útil para realizar mejores diagnósticos y pronósticos, así como para encontrar nuevas terapias.
+Los lncRNA están implicados en la regulación génica, por lo que en enfermedades se pueden encontrar desregulados, pudiendo ser potenciales biomarcadores (más o menos específicos), así como targets para nuevas terapias. 
+
 
 # Materiales y metodología
 ### 1. Obtención de las muestras y control de calidad
@@ -58,14 +59,16 @@ Una vez obtenidas las muestras, se les realiza un control de calidad.
 #### 2.1 Con Kallisto
 Se utiliza el programa de pseudoalineamientos Kallisto, ya que ofrece una mayor precisión que los métodos de alineamiento convencionales para los lncRNA ("Benchmark of long non-coding RNA cquantification for RNA sequencing of cancer samples"). A su vez, se ha combinado con una anotación transcriptómica completa ("Homo_sapiens.GRCh38.cdna.all.fa"), tal y como se recomienda. 
 
-#### 2.2 Con Subread
-En este caso se utiliza como transcriptoma de referencia el "gencode.v29.annotation.gtf". 
+#### 2.2 Con Subread y FeatureCounts
+El transcriptoma de referencia utilizado es el "gencode.v29.annotation.gtf". Subread alinea los reads de datos genómicos de DNA-Seq y RNA-Seq.
+FeatureCounts es un software informático que cuantifica los reads de los genes.
 
 ### 3. Normalización y transformación de los counts
-Las cuentas se han normalizado mediante DESeq2, una librería de Bioconductor que realiza un de expresión génica diferencial basado en una distribución binomial negativa. A su vez, los lncRNA se expresan menos como norma general, por lo que son susceptibles de sufrir una mayor varianza. Para rectificar este fenómeno, se decide realizar la transformación rlog, disponible en la misma librería.
+Las cuentas se han normalizado mediante DESeq2, una librería de Bioconductor que realiza un de expresión génica diferencial basado en una distribución binomial negativa. 
+Los lncRNA suelen expresarse mucho menos que los protein-coding genes, teniendo una gran varianza. Para corregir este fenomeno, se puede hacer una transformacion "rlog" de los datos, que los transforma a una escala log2 y minimiza las diferencias entre las muestras con genes que se expresan poco. Es un metodo util a la hora de buscar outliers o como input de tecnicas de Machine Learning, como la clusterizacion.
 
 ### 4. Filtrado de genes
-Se aplican los siguientes filtros para las cuentas normalizadas:
+Se aplican los siguientes filtros a las cuentas normalizadas(sin transformacion de datos):
 - Cada gen debe tener un mínimo de 10 counts en al menos 5 pacientes.
 - El máximo de cada gen tiene que ser igual o superior a 50
 - La desviación estándar de cada gen debe ser igual o superior a 10.
