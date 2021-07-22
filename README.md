@@ -85,17 +85,18 @@ Como el grupo de datos es pequeño, se prueba haciendo un clustering jerárquico
 
 
 ### 6. Análisis de supervivencia
-Se hace un clustering jerárquico de las muestras, dividiéndolas en dos grupos de pacientes (high- y low- risk).
+Se hace un clustering jerárquico de las muestras, dividiéndolas en dos grupos de pacientes (high- y low- risk). A continuación se realiza el análisis de supervivencia siguiendo el método de Kaplan-Meier. El p-valor considerado estadísticamente significativo es de 0.05 o menor y se necesita al menos un 20% del total de los pacientes (6 pacientes, en este caso) en cada uno de los grupos(se eliminan los datos excesivamente desbalanceados de este modo).
 
+En el caso de los genes NICO, al ser un dataset pequeño, se decide realizar también análisis de supervivencia de cada gen. Además, se vuelve a hacer un análisis de supervivencia con los valores del primer y cuarto cuartil, forzando así a que haya un número balanceado de pacientes en cada grupo.
 
 
 
 # Resultados
+El clustering jerárquico general de los genes no da ningún clúster significativo, por lo que se decide realizar subclusterings consecutivos hasta obtener 50 genes o menos por clústers.
+En este caso, hay tres clústers significativos, de 2,9 y 12 genes, respectivamente. 
+
+Tras el análisis de los genes NICO, no se ha observado ningún clustering significativo (de 15 genes o menos). Ningún gen individual influye significativamente en la supervivencia. Sin embargo, en el análisis en el que se mantienen los cuartiles extremos, 8 genes son estadísticamente significativos. 
 
 
 
-
-#Discusión
-
-#Conclusión
 
