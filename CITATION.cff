@@ -1,0 +1,20 @@
+abstract: Repositorio destinado al Trabajo de Fin de Máster en Métodos Computacionales en Ciencias
+authors:
+  - family-names: Erasun
+    given-names: Janire
+    
+cff-version: 1.1.0
+date-released: "2021-08-27"
+identifiers:
+  - description: Colección de los scripts y artículos utilizados en el TFM, así como el documento del mismo.
+    
+keywords:
+  - lncRNA
+  - hepatocarcinoma
+  - HCC
+  - Computational Methods
+
+message: If you use this software, please cite it using these metadata.
+repository-code: "https://github.com/janire98/lncrna"
+title: lncrna en Hepatocarcinoma
+version: 0.1
